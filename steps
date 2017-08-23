@@ -1,0 +1,41 @@
+steps for the application.....
+
+
+->create the eloquont model and the corresponding controller and view files...
+->create the ness migration files for the model...
+->the view files must be in plural
+->the model must be singular
+->controller must end with Controller and name is plural
+->the conventions are same as rails..COC
+->create corres folders in the view directory and add the basic template files like index,show,create,delete....
+->in the controller files the CRUD methods are present...they are index,show,store,create,delete,update.......they are resourse controllers..........
+
+-> to get routes   php artisan route:list
+->to get help options  php artisan help helpoptions
+-> to migrate   php artisan migrate
+-> to use the console for the model..  php artissan tinker
+
+
+
+
+get methods for------index,create,show,edit\
+
+post methods for-----store------it is invoked in the form...
+patch method----update
+delete method----for delete......
+
+
+---------------------------------------------
+method---------PATH--------------
+-----------------------------------------------
+
+index ------/posts
+edit  -------/posts/id/edit
+store ------/posts
+create -----/posts/create
+delete------/posts/id/delete
+update----/posts/ID
+show-------/posts/id
+
+----------------------------------------------
+
