@@ -4,28 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Post;
+use App\User;
+
 class PostsController extends Controller
 {
     //
 
 
 public function index() {
+// $post = Post::all();
+	$posts = Post::orderBy('created_at','desc')->get();
+return view('posts.index',compact('posts'));
+}
 
-return view('posts.index');
 
+public function show($id)
+{
+
+$post = Post::find($id);
+return view('posts.show',compact('post'));
 
 }
 
-    public function create(){}
 
+public function create()
 
-    public function store() {}
+{return view('posts.create');}
 
-    public function comments(){}
+   public function store()
 
-    public function show(){}
+   {
 
-    public function delete() {}
+Post::create(['title' => request('title'),'body' => request('body')]);
+return redirect('/posts');
+
+   }
 
 
 

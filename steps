@@ -39,3 +39,109 @@ show-------/posts/id
 
 ----------------------------------------------
 
+-> create a model post
+->create controller PostsController
+->create migration for the post table
+->create view files for post in resources/views/posts/index.blade.php
+->create view files like create,show,update...
+
+->add route in routes file...web.php....for posts related url....
+
+
+->under postscontroller.............
+create index function coress to index.blade.php....
+
+public function index() {
+
+// $post = Post::all();
+	$posts = Post::orderBy('created_at','desc')->get();   //to display recent posts first....
+
+return view('posts.index',compact('posts'));  //u r passing the posts model var as argument...
+
+
+}
+
+->post show method....to show individual posts.....redirect to posts.show view....
+
+public function show($id)   //id take the integer value passed in the url...
+{
+
+$post = Post::find($id);  //going to fetch indivi post and store in $post
+
+
+return view('posts.show',compact('post'));  //going to pass the $post as post to view
+
+}
+
+
+
+
+the show.blade.php...................
+
+show page of posts....
+
+ {{ $post->title }}  //same name as the compact variable...
+            
+
+
+
+->to create a post............
+public function create()
+
+{return view('posts.create');}
+
+create.blade.php 
+@extends('layouts.app')
+
+
+
+form to create posts...
+<form method="POST" action="/posts">   //calling the post action for /post url...so crt in routes.
+  {{ csrf_field() }}
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Title</label>
+    <input type="text" class="form-control" id="title" name="title" >
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Body</label>
+    <input type="textarea" class="form-control" id="body" name="body">
+  </div>
+ 
+  <button type="submit" class="btn btn-success">Post It</button>
+</form>
+
+
+note: in routes file  the create must be followed by show...not the reverse...else we will get nonobject reference error....
+
+public function show($id)
+{
+
+$post = Post::find($id);
+return view('posts.show',compact('post'));
+
+}
+
+
+public function create()
+
+{return view('posts.create');}//this wll only return the view....the form action only is invoked later..........
+
+   public function store()
+
+   {
+
+Post::create(['title' => request('title'),'body' => request('body')]);
+return redirect('/posts');
+
+   }
+
+
+create.blade.php   <form method="POST" action="/posts">   calles the post request ...the path for post request is.....Route::post('/posts','PostsController@store');
+store method is invoked by create.....
+
+
+
+note:  include ......use App\Post
+use App\Comment
+use App\User; in the corresponding model files....

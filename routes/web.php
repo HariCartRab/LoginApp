@@ -23,23 +23,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/posts','PostsController@index');
 
+Route::get('/posts/create','PostsController@create');   //going to show the new post form...place a post request.....so it calles the store method....
 Route::get('/posts/{post}','PostsController@show');
-
-Route::get('/posts/create','PostsController@create');
-
 Route::post('/posts','PostsController@store');
-
-Route::patch('/posts/{post}','PostsController@update');
-
-Route::delete('/posts/{id}','PostsController@delete');
-
-
 
 //routes for comments
 
 
-Route::get('/post/{id}/comments/create','CommentsController@create');
-Route::get('/posts/{id}/comments','CommentsController@show');
+Route::get('/post/{post}/comments','CommentsController@store');
+//Route::get('/posts/{id}/comments','CommentsController@show');
 
 
 //routes for basic login and signup...

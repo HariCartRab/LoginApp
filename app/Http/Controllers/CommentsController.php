@@ -6,24 +6,19 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-    //
-public function index() {}
 
-public function store() {}
-
-    public function create(){}
-
-    public function post(){}
-
-    public function show(){
-
-return view('comments.show');
-
-    }
-
-    public function delete() {}
+public function store(Post $post){
 
 
+$post->addComment(request('comment'));
 
+// Comment::create([
+// 'body' => request('comment'),
+// 'post_id' => $post->id
 
+// 	]);
+
+return back();
+
+}
 }
